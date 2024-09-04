@@ -53,4 +53,26 @@ class ProductController extends Controller
 
         return response()->json("Product has been deleted", 200);
     }
+
+    public function updateStock(Request $request, $id)
+    {
+        $request->validate([
+            'quantity' => 'required|integer|min:0',
+        ]);
+
+        // Temukan produk berdasarkan ID
+        $product = Product::findOrFail($id);
+
+        // Kurangi stok produk
+        $product->stock -= $request->quantity;
+
+        // Pastikan stok tidak negatif
+        if ($product->stock < 0) {
+            return response()->json(['error' => 'Insufficient stock'], 400);
+        }
+
+        $product->save();
+
+        return new ProductResource($product);
+    }
 }

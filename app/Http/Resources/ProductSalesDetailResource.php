@@ -21,6 +21,7 @@ class ProductSalesDetailResource extends JsonResource
             // 'sales_record' => new SalesRecordResource($this->whenLoaded('salesRecord')),
             // 'product' => new ProductResource($this->whenLoaded('product')),
             'quantity' => $this->quantity,
+            'price' => $this->price,
             'subtotal' => $this->subtotal,
         ];
     }

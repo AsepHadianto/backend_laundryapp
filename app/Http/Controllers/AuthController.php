@@ -49,9 +49,16 @@ class AuthController extends Controller
         }
 
         $token = $user->createToken('auth-token')->plainTextToken;
+        $userId = $user->id; // Ambil userId dari user yang sedang login
+        $roleId = $user->role_id;
 
-        return response()->json(['token' => $token]);
+        return response()->json([
+            'token' => $token,
+            'user_id' => $userId,
+            'role_id' => $roleId
+        ]);
     }
+
 
     public function logout(Request $request)
     {

@@ -21,6 +21,7 @@ class ServiceSalesDetailResource extends JsonResource
             // 'sales_record_id' => new SalesRecordResource($this->whenLoaded('salesRecord')),
             // 'service_id' => new ServiceResource($this->whenLoaded('service')),
             'quantity' => $this->quantity,
+            'price' => $this->price,
             'subtotal' => $this->subtotal,
         ];
     }

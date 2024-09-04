@@ -10,7 +10,7 @@ class ServiceSalesDetail extends Model
     use HasFactory;
 
     public $timestamps = false;
-    protected $fillable = ['sales_record_id', 'service_id', 'quantity', 'subtotal'];
+    protected $fillable = ['sales_record_id', 'service_id', 'quantity', 'price', 'subtotal'];
 
     public function salesRecord()
     {

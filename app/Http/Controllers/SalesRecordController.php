@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\SalesRecord;
 use Illuminate\Http\Request;
 use App\Http\Resources\SalesRecordResource;
+use Carbon\Carbon;
 
 class SalesRecordController extends Controller
 {
@@ -52,5 +53,14 @@ class SalesRecordController extends Controller
         $salesRecord->delete();
 
         return response()->json("Sales record has been deleted", 200);
+    }
+
+    public function todayOmzet()
+    {
+        // Mengambil semua sales record yang dibuat hari ini
+        $today = Carbon::today();
+        $totalOmzet = SalesRecord::whereDate('date', $today)->sum('total_amount');
+
+        return response()->json(['total_omzet' => (float) $totalOmzet], 200);
     }
 }

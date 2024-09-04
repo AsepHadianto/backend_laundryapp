@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Support\Facades\Log;
+// use Illuminate\Support\Facades\Log;
 use App\Models\User;
 use Illuminate\Http\Request;
 use App\Http\Resources\UserResource;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Auth;
 
 class UserController extends Controller
 {
@@ -46,12 +48,9 @@ class UserController extends Controller
             'username' => 'required|unique:users,username,' . $user->id,
             'phone' => 'required',
             'email' => 'required|email|unique:users,email,' . $user->id,
-            'password' => 'required',
-            'role_id' => 'required|exists:roles,id',
         ]);
 
         $input = $request->all();
-        $input['password'] = bcrypt($input['password']);
 
         $user->update($input);
 
